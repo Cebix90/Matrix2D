@@ -8,6 +8,8 @@
             Matrix2D p  = new ();
 
             Console.WriteLine(p.Equals(m));
+
+            Console.WriteLine(p + m);
         }
     }
 }

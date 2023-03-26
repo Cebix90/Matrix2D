@@ -55,5 +55,23 @@ namespace MatrixLib
         public static bool operator !=(Matrix2D left, Matrix2D right) => !(left == right);
 
         #endregion
-    }
+
+        #region dodawanie
+
+        public Matrix2D Plus(Matrix2D other)
+        {
+            //if (IsNaN(this) || IsNaN(other)) return NaN; 
+
+            return new Matrix2D(this.A + other.A, this.B + other.B, this.C + other.C, this.D + other.D);
+        }
+
+        private static Matrix2D Sum(Matrix2D u1, Matrix2D u2)
+            => u1.Plus(u2);
+
+        public static Matrix2D operator +(Matrix2D u1, Matrix2D u2)
+        {
+            return Sum(u1,u2);
+        } 
+            #endregion
+        }
 }
