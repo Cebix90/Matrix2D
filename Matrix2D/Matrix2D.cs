@@ -56,11 +56,11 @@ namespace MatrixLib
 
         #endregion
 
-        #region dodawanie
+        #region addition
 
         public Matrix2D Plus(Matrix2D other)
         {
-            //if (IsNaN(this) || IsNaN(other)) return NaN; 
+            if (this is null && other is null) return null; 
 
             return new Matrix2D(this.A + other.A, this.B + other.B, this.C + other.C, this.D + other.D);
         }
@@ -71,7 +71,24 @@ namespace MatrixLib
         public static Matrix2D operator +(Matrix2D u1, Matrix2D u2)
         {
             return Sum(u1,u2);
-        } 
-            #endregion
         }
+        #endregion
+
+        #region substraction
+
+        public Matrix2D Minus(Matrix2D other)
+        {
+            return new Matrix2D(this.A - other.A, this.B - other.B, this.C - other.C, this.D - other.D);
+        }
+
+        private static Matrix2D Difference(Matrix2D u1, Matrix2D u2)
+            => u1.Minus(u2);
+
+        public static Matrix2D operator -(Matrix2D u1, Matrix2D u2)
+        {
+            return Difference(u1, u2);
+        }
+
+        #endregion
+    }
 }

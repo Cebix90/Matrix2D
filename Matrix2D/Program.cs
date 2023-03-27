@@ -10,6 +10,8 @@
             Console.WriteLine(p.Equals(m));
 
             Console.WriteLine(p + m);
+
+            Console.WriteLine(p - m);
         }
     }
 }
