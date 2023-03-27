@@ -4,6 +4,8 @@ namespace MatrixLib
 {
     public class Matrix2D : IEquatable<Matrix2D>
     {
+        #region properies, constructor, override ToString
+
         public int A { get; init; }
         public int B { get; init; }
         public int C { get; init; }
@@ -23,6 +25,8 @@ namespace MatrixLib
         public static readonly Matrix2D Zero = new (0,0,0,0);
 
         public override string ToString() => $"[{A}, {B}]\n[{C}, {D}]";
+
+        #endregion
 
         #region implementation IEquatable<Matrix2D>
 
@@ -101,12 +105,85 @@ namespace MatrixLib
                 this.C * other.A + this.D * other.C, this.C * other.B + this.D * other.D);
         }
 
-        private static Matrix2D wynik(Matrix2D u1, Matrix2D u2)
+        private static Matrix2D Product(Matrix2D u1, Matrix2D u2)
             => u1.Multiplication(u2);
 
         public static Matrix2D operator *(Matrix2D u1, Matrix2D u2)
         {
-            return wynik(u1, u2);
+            return Product(u1, u2);
+        }
+
+        #endregion
+
+        #region scalar multiplication left & right
+
+        public Matrix2D ScalarMultiplicationLeft(int other)
+        {
+            return new Matrix2D(this.A * other, this.B * other, this.C * other, this.D * other);
+        }
+
+        private static Matrix2D ScalarProductLeft(Matrix2D u1, int k)
+            => u1.ScalarMultiplicationLeft(k);
+
+        public static Matrix2D operator *(Matrix2D u1, int k)
+        {
+            return ScalarProductLeft(u1, k);
+        }
+
+       /*********************************************************************************************/
+
+        public Matrix2D ScalarMultiplicationRight(int other)
+        {
+            return new Matrix2D(other * this.A, other * this.B, other * this.C, other * this.D);
+        }
+
+        private static Matrix2D ScalarProductRight(int k, Matrix2D u1)
+            => u1.ScalarMultiplicationRight(k);
+
+        public static Matrix2D operator *(int k, Matrix2D u1)
+        {
+            return ScalarProductRight(k, u1);
+        }
+
+        #endregion
+
+        #region changing the sign of the matrix
+
+        public Matrix2D ChangeTheSign()
+        {
+            return new Matrix2D(this.A * -1, this.B * -1, this.C * -1, this.D * -1);
+        }
+
+        private static Matrix2D CharacterReplacementResult(Matrix2D u1)
+            => u1.ChangeTheSign();
+
+        public static Matrix2D operator -(Matrix2D u1)
+        {
+            return CharacterReplacementResult(u1);
+        }
+
+        #endregion
+
+        #region transposition
+
+        public Matrix2D Transpose()
+        {
+            return new Matrix2D(this.A, this.C, this.B, this.D);
+        }
+
+        #endregion
+
+        #region matrix's determinant
+
+
+        public static int Determinant(Matrix2D u)
+        {
+            return u.A * u.D - u.B * u.C;
+        }
+
+        public int Det()
+        {
+            return this.A * this.D - this.B * this.C;
         }
 
         #endregion
