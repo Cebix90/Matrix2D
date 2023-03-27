@@ -22,7 +22,7 @@ namespace MatrixLib
         public static readonly Matrix2D Id = new (1,0,0,1);
         public static readonly Matrix2D Zero = new (0,0,0,0);
 
-        public override string ToString() => $"[[{A}, {B}] , [{C}, {D}]]";
+        public override string ToString() => $"[{A}, {B}]\n[{C}, {D}]";
 
         #region implementation IEquatable<Matrix2D>
 
@@ -87,6 +87,26 @@ namespace MatrixLib
         public static Matrix2D operator -(Matrix2D u1, Matrix2D u2)
         {
             return Difference(u1, u2);
+        }
+
+        #endregion
+
+        #region multiplication
+
+        public Matrix2D Multiplication(Matrix2D other)
+        {
+            if (this is null && other is null) return null;
+
+            return new Matrix2D(this.A * other.A + this.B * other.C, this.A * other.B + this.B * other.D,
+                this.C * other.A + this.D * other.C, this.C * other.B + this.D * other.D);
+        }
+
+        private static Matrix2D wynik(Matrix2D u1, Matrix2D u2)
+            => u1.Multiplication(u2);
+
+        public static Matrix2D operator *(Matrix2D u1, Matrix2D u2)
+        {
+            return wynik(u1, u2);
         }
 
         #endregion

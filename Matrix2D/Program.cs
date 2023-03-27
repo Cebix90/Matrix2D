@@ -4,14 +4,24 @@
     {
         static void Main(string[] args)
         {
-            Matrix2D m  = new ();
-            Matrix2D p  = new ();
+            Matrix2D m  = new (1,2,3,4);
+            Matrix2D p  = new (2,2,3,4);
 
-            Console.WriteLine(p.Equals(m));
+            //Console.WriteLine(p.Equals(m));
+            //Console.WriteLine();
 
-            Console.WriteLine(p + m);
+            Console.WriteLine(m);
+            Console.WriteLine();
+            Console.WriteLine(p);
+            Console.WriteLine();
 
-            Console.WriteLine(p - m);
+            //Console.WriteLine(m + p);
+            //Console.WriteLine();
+            //
+            //Console.WriteLine(m - p);
+            //Console.WriteLine();
+
+            Console.WriteLine(m * p);
         }
     }
 }
